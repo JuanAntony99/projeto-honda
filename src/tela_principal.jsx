@@ -11,36 +11,40 @@ function tela_principal() {
       nome: "Civic Type R",
       preco: "R$ 430.500",
       imagem:
-        "Civic Type R.png"
+        "Civic Type R.png",
+      link: "https://www.honda.com.br/automoveis/civic-typer"
     },
     {
       id: 2,
       nome: "CB500 Hornet",
       preco: "R$ 45.000",
       imagem:
-        "CB500 Hornet.png"
+        "CB500 Hornet.png",
+      link: "https://www.honda.com.br/motos/street/naked/hornet-500"
     },
     {
       id: 3,
       nome: "Honda HR-V",
       preco: "R$ 214.000",
       imagem:
-        "Honda HR-V.png"
+        "Honda HR-V.png",
+      link: "https://www.honda.com.br/automoveis/hrv"
     },
     {
       id: 4,
       nome: "Honda CG160 Titan",
       preco: "R$ 23.000",
       imagem:
-        "CG160 Titan.png"
-    }
-    ,
+        "CG160 Titan.png",
+      link: "https://www.honda.com.br/motos/street/city/cg-160-titan"
+    },
     {
       id: 5,
       nome: "Honda Accord",
       preco: "R$ 333.000",
       imagem:
-        "Accord.png"
+        "Accord.png",
+      link: "https://www.honda.com.br/automoveis/accord"
     }
     ,
     {
@@ -48,7 +52,8 @@ function tela_principal() {
       nome: "Pop110i ES",
       preco: "R$ 11.000",
       imagem:
-        "Pop110i ES.png"
+        "Pop110i ES.png",
+      link: "https://www.honda.com.br/motos/street/city/pop110i-es"
     }
   ];
 
@@ -82,7 +87,7 @@ function tela_principal() {
 
             <p>{produto.preco}</p>
 
-            <button>Ver Produto</button>
+            <button onClick={() => window.open(produto.link, '_blank')}>Ver Produto</button>
           </div>
         ))}
       </section>
