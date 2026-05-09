@@ -22,7 +22,7 @@ body {
 
 .logo {
   display: flex;
-  height: 15vh;
+  height: 10vh;
 }
 
 .navbar h1 {
@@ -126,7 +126,10 @@ body {
   background-color: #990000;
 }
 
-footer {
+.rodape-pag-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #cc0000;
   height: 70px;
   color: white;

@@ -8,47 +8,47 @@ function tela_principal() {
   const produtos = [
     {
       id: 1,
-      nome: "Honda Civic",
-      preco: "R$ 180.000",
+      nome: "Civic Type R",
+      preco: "R$ 430.500",
       imagem:
-        "https://images.unsplash.com/photo-1553440569-bcc63803a83d"
+        "Civic Type R.png"
     },
     {
       id: 2,
-      nome: "Honda CB 500",
+      nome: "CB500 Hornet",
       preco: "R$ 45.000",
       imagem:
-        "https://images.unsplash.com/photo-1558981806-ec527fa84c39"
+        "CB500 Hornet.png"
     },
     {
       id: 3,
       nome: "Honda HR-V",
-      preco: "R$ 160.000",
+      preco: "R$ 214.000",
       imagem:
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+        "Honda HR-V.png"
     },
     {
       id: 4,
-      nome: "Honda Titan 160ES",
+      nome: "Honda CG160 Titan",
       preco: "R$ 23.000",
       imagem:
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+        "CG160 Titan.png"
     }
     ,
     {
       id: 5,
-      nome: "Honda Pop110i",
-      preco: "R$ 23.000",
+      nome: "Honda Accord",
+      preco: "R$ 333.000",
       imagem:
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+        "Accord.png"
     }
     ,
     {
       id: 6,
-      nome: "Honda Pop110i",
-      preco: "R$ 23.000",
+      nome: "Pop110i ES",
+      preco: "R$ 11.000",
       imagem:
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+        "Pop110i ES.png"
     }
   ];
 
@@ -58,7 +58,7 @@ function tela_principal() {
       <nav className="navbar">
         
         <div className='logo'>
-          <img src='logo-honda.jpg'></img>
+          <img src='logoHonda.png'></img>
         </div>
 
         <div className="links">
@@ -87,7 +87,7 @@ function tela_principal() {
         ))}
       </section>
 
-        <footer> @Honda</footer>
+        <footer className='rodape-pag-principal'> © 2026 - Site Honda </footer>
     </div>
   );
 }
