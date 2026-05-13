@@ -3,8 +3,13 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import "./tela_principal.css";
+import { useNavigate } from 'react-router-dom';
 
 function tela_principal() {
+  
+  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+
   const produtos = [
     {
       id: 1,
@@ -67,9 +72,9 @@ function tela_principal() {
         </div>
 
         <div className="links">
-          <a href="#">Home</a>
-          <a href="#">Login</a>
-          <a href="#">Cadastro</a>
+          <a onClick={() => navigate('/')}>Home</a>
+          <a onClick={() => navigate('/login')}>Login</a>
+          <a onClick={() => navigate('/cadastro')}>Cadastro</a>
         </div>
       </nav>
 
