@@ -1,10 +1,26 @@
 import './tela_login.css'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 function App() {
+
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  function login_adm() {
+
+    if (email === "admin@honda.com" && senha === "admin123") {
+      navigate("/adminpage");
+    } else {
+      alert("Email ou senha inválidos");
+    }
+
+  }
+
   return (
+
     <div className="container">
 
       <div className="left-side">
@@ -12,6 +28,7 @@ function App() {
         <div className="overlay"></div>
 
         <div className="content-left">
+
           <h1>HONDA</h1>
 
           <p>
@@ -31,6 +48,7 @@ function App() {
             </div>
 
           </div>
+
         </div>
 
       </div>
@@ -46,13 +64,29 @@ function App() {
           </p>
 
           <div className="input-group">
+
             <label>E-mail</label>
-            <input type="email" placeholder="Digite seu e-mail" />
+
+            <input
+              type="email"
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
           </div>
 
           <div className="input-group">
+
             <label>Senha</label>
-            <input type="password" placeholder="Digite sua senha" />
+
+            <input
+              type="password"
+              placeholder="Digite sua senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+            />
+
           </div>
 
           <div className="options">
@@ -66,13 +100,20 @@ function App() {
 
           </div>
 
-          <button className="btn-login" onClick={() => navigate('/')}>
+          <button className="btn-login" onClick={login_adm}>
             Entrar
           </button>
 
           <div className="register">
             <span>Não possui conta?</span>
-            <a onClick={() => navigate('/cadastro')} style={{ cursor: 'pointer' }}> Registrar</a>
+
+            <a
+              onClick={() => navigate('/cadastro')}
+              style={{ cursor: 'pointer' }}
+            >
+              Registrar
+            </a>
+
           </div>
 
         </div>

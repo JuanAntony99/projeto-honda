@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar-admin {
+  background-color: #111;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.logo-admin {
+  display: flex;
+  height: 10vh;
+}
+
+.navbar-admin h1 {
+  color: #cc0000;
+}
+
+.links-admin {
+  display: flex;
+  gap: 20px;
+}
+
+.links-admin a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.links-admin a:hover {
+  color: #cc0000;
+}
+
+.container_adm {
+  height: 77vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
+.card-admin {
+  background-color: #cc0000;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 590px;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 50px;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.btn {
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.usuarios {
+  background-color: #007bff;
+}
+
+.usuarios:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
+.produtos {
+  background-color: #28a745;
+}
+
+.produtos:hover {
+  background-color: #1d7a33;
+  transform: scale(1.03);
+}
+
+.rodape-pag-principal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #cc0000;
+  height: 70px;
+  color: white;
+}

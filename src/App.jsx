@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import TELAPRINCIPAL from "./tela_principal.jsx";
 import TELACADASTRO from "./tela_cadastro.jsx";
+import ADMINPAGE from "./AdminPage.jsx";
 import TELALOGIN from "./tela_login.jsx";   // ← adiciona esse import
 import TELACARRINHO from "./tela_carrinho.jsx";
 
@@ -21,7 +22,11 @@ function App() {
           <Route path="/" element={<TELAPRINCIPAL />} />
           <Route path="/login" element={<TELALOGIN />} />     {/* ← nova rota */}
           <Route path="/cadastro" element={<TELACADASTRO />} />
+<<<<<<< Updated upstream
           <Route path="/carrinho" element={<TELACARRINHO />} />
+=======
+          <Route path="/adminpage" element={<ADMINPAGE />} />
+>>>>>>> Stashed changes
         </Routes>
       </BrowserRouter>
     </>

@@ -59,7 +59,7 @@ body {
   margin-bottom: 10px;
 }
 
-.produtos {
+.produtos_principal {
   display: flex;
   justify-content: center;
   gap: 70px;

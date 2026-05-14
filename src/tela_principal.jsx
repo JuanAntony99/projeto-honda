@@ -83,7 +83,7 @@ function tela_principal() {
         <p>Conheça os principais modelos Honda</p>
       </header>
 
-      <section className="produtos">
+      <section className="produtos_principal">
         {produtos.map((produto) => (
           <div className="card" key={produto.id}>
             <img src={produto.imagem} alt={produto.nome} />
