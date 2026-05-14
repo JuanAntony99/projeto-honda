@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import TELAPRINCIPAL from "./tela_principal.jsx";
 import TELACADASTRO from "./tela_cadastro.jsx";
 import TELALOGIN from "./tela_login.jsx";   // ← adiciona esse import
+import TELACARRINHO from "./tela_carrinho.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<TELAPRINCIPAL />} />
           <Route path="/login" element={<TELALOGIN />} />     {/* ← nova rota */}
           <Route path="/cadastro" element={<TELACADASTRO />} />
+          <Route path="/carrinho" element={<TELACARRINHO />} />
         </Routes>
       </BrowserRouter>
     </>
