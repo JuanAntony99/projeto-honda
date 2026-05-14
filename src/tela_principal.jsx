@@ -63,7 +63,7 @@ function tela_principal() {
   ];
 
   return (
-    <div className="container">
+    <div className="container-principal">
 
       <nav className="navbar">
         
