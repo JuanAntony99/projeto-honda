@@ -68,7 +68,7 @@ function tela_principal() {
       <nav className="navbar">
         
         <div className='logo'>
-          <img src='logoHonda.png'></img>
+          <img src='Honda_logo.png'></img>
         </div>
 
         <div className="links">
