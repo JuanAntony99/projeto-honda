@@ -11,6 +11,7 @@ import TELACADASTRO from "./tela_cadastro.jsx";
 import ADMINPAGE from "./AdminPage.jsx";
 import TELALOGIN from "./tela_login.jsx";   // ← adiciona esse import
 import TELACARRINHO from "./tela_carrinho.jsx";
+import TELAPRODUTOS from "./tela_produtos.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,11 +23,9 @@ function App() {
           <Route path="/" element={<TELAPRINCIPAL />} />
           <Route path="/login" element={<TELALOGIN />} />     {/* ← nova rota */}
           <Route path="/cadastro" element={<TELACADASTRO />} />
-<<<<<<< Updated upstream
           <Route path="/carrinho" element={<TELACARRINHO />} />
-=======
           <Route path="/adminpage" element={<ADMINPAGE />} />
->>>>>>> Stashed changes
+          <Route path="/produto/:id" element={<TELAPRODUTOS />} />
         </Routes>
       </BrowserRouter>
     </>

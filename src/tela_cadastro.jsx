@@ -16,6 +16,25 @@ function tela_cadastro() {
     confirmarSenha: "",
   });
 
+  async function salvarUsuario() {
+  try {
+    const resposta = await fetch('http://localhost:3000/usuarios', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+  const dados = await resposta.json();
+      if(dados.erro!=undefined){
+          alert('Já existe um usuario com esse nome')
+        }
+    } catch (erro) {
+        console.error(erro)
+    }
+  }
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -31,6 +50,7 @@ function tela_cadastro() {
       return;
     }
 
+    salvarUsuario();
     alert("Cadastro realizado com sucesso!");
 
     setFormData({
