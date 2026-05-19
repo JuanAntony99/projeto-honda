@@ -11,7 +11,8 @@ import TELACADASTRO from "./tela_cadastro.jsx";
 import ADMINPAGE from "./AdminPage.jsx";
 import TELALOGIN from "./tela_login.jsx";   // ← adiciona esse import
 import TELACARRINHO from "./tela_carrinho.jsx";
-import Tela_produtos from './cadastro_produtos.jsx'
+import TELAPRODUTOS from "./tela_produtos.jsx";
+import TELACASDASTROPRODUTOS from "./cadastro_produtos.jsx"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,7 +26,8 @@ function App() {
           <Route path="/cadastro" element={<TELACADASTRO />} />
           <Route path="/carrinho" element={<TELACARRINHO />} />
           <Route path="/adminpage" element={<ADMINPAGE />} />
-          <Route path="/cadastro_produtos" element={<Tela_cadastroprodutos />} />
+          <Route path="/produto/:id" element={<TELAPRODUTOS />} />
+          <Route path="/cadastro_produtos" element={<TELACASDASTROPRODUTOS />} />
         </Routes>
       </BrowserRouter>
     </>
