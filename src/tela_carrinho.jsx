@@ -25,22 +25,30 @@ function tela_principal() {
 
   
   const [produtos, setDados] = useState([]);
-  
+
     useEffect(() => {
-      if (id != 0){
-        buscarProdutos();
-      }
-    }, []); 
+    if (id != 0){
+      buscarProdutos();
+    }
+  }, []); 
   
     async function buscarProdutos() {
-      try {
-        const resposta = await fetch(`http://localhost:3000/carrinho/${id}`);
-        const produtos = await resposta.json();
-        setDados(produtos);
-      } catch (error) {
-        console.error("Erro ao buscar os produtos:", error);
-      }
+  try {
+    const resposta = await fetch(`http://localhost:3000/carrinho/${id}`);
+
+    if (!resposta.ok) {
+      setDados([]);
+      return;
     }
+
+    const dadosDados = await resposta.json();
+    setDados(dadosDados);
+    
+  } catch (error) {
+    console.error("Erro ao buscar os produtos:", error);
+    setDados([]);
+  }
+}
 
  
   const total = useMemo(() => {
@@ -70,20 +78,34 @@ function tela_principal() {
       </nav>
 
       <section className="produtos-prod">
-        {produtos.map((produto) => (
-        <div className={`card-prod ${selected[produto.id] ? "selected" : ""}`} onClick={() => setSelected({...selected,[produto.id]: !selected[produto.id]})}>
-            <label className="check-prod" onClick={(e) => e.stopPropagation()}>
-              <input type="checkbox" checked={selected[produto.id] || false} onChange={() => setSelected({...selected, [produto.id]: !selected[produto.id]})}/>
-              <span></span>
-            </label>
-
-            <img src={produto.imagem} alt={produto.nome} />
-
-            <h3>{produto.nome}</h3>
-
-            <p>{produto.preco.toLocaleString("pt-BR", {style: "currency", currency: "BRL",})}</p>
+        {produtos.length === 0 ? (
+          <div className="carrinho-vazio">
+            <p>Seu carrinho está vazio. Adicione produtos!</p>
           </div>
-        ))}
+        ) : (
+          produtos.map((produto) => (
+            <div 
+              key={produto.id} 
+              className={`card-prod ${selected[produto.id] ? "selected" : ""}`} 
+              onClick={() => setSelected({...selected, [produto.id]: !selected[produto.id]})}
+            >
+              <label className="check-prod" onClick={(e) => e.stopPropagation()}>
+                <input 
+                  type="checkbox" 
+                  checked={selected[produto.id] || false} 
+                  onChange={() => setSelected({...selected, [produto.id]: !selected[produto.id]})}
+                />
+                <span></span>
+              </label>
+
+              <img src={produto.imagem} alt={produto.nome} />
+
+              <h3>{produto.nome}</h3>
+
+              <p>{produto.preco.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</p>
+            </div>
+          ))
+        )}
       </section>
 
         <footer className='rodape-pag-prod'>
