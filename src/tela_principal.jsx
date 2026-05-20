@@ -38,7 +38,7 @@ function tela_principal() {
         </div>
 
         <div className="links">
-          <a onClick={() => navigate('/')}>Home</a>
+          <a onClick={() => navigate('/carrinho')}>Carrinho</a> 
           <a onClick={() => navigate('/login')}>Login</a>
           <a onClick={() => navigate('/cadastro')}>Cadastro</a>
         </div>

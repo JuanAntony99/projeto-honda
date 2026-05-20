@@ -3,11 +3,54 @@ import { useNavigate, useParams } from 'react-router-dom';
 import "./tela_produtos.css";
 
 function TELAPRODUTOS() {
+  const user = JSON.parse(localStorage.getItem("user"));
   
-  const { id } = useParams();
+  let id_cliente = 0;
+
+  if (!user || Object.keys(user).length === 0) {
+    id_cliente = 0;
+  } else {
+    id_cliente = user.id;
+  }
+
+  const { id } = useParams(); // ID do produto vindo da URL da página de detalhes
   const navigate = useNavigate();
   const [produto, setProduto] = useState(null);
   const [erro, setErro] = useState(false);
+
+  async function adicionarAoCarrinho(idProduto) {
+    // CORREÇÃO 1: Mudado de 'id' para 'id_cliente' para checar o usuário logado
+    if (id_cliente === 0) {
+      alert("Faça login para adicionar produtos ao carrinho!");
+      return;
+    }
+
+    try {
+      const resposta = await fetch(`http://localhost:3000/carrinho`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // CORREÇÃO 2: Enviando todos os dados que o seu back-end (req.body) espera receber
+        body: JSON.stringify({
+          id_usuario: id_cliente, // Seu back espera 'id_usuario'
+          id_produto: idProduto,  // ID do produto que foi passado por parâmetro
+          qtde: 1                 // Quantidade padrão inicial
+        }),
+      });
+
+      const dados = await resposta.json();
+
+      if (resposta.ok) {
+        alert("Produto adicionado com sucesso!");
+      } else {
+        alert(`Aviso: ${dados.erro || "Não foi possível adicionar"}`);
+      }
+    } catch (error) {
+      console.error("Erro ao conectar com o servidor:", error);
+      alert("Erro na conexão com o servidor.");
+    }
+  }
 
   useEffect(() => {
     // Busca os dados do produto na API (Porta 3000)
@@ -57,7 +100,7 @@ function TELAPRODUTOS() {
             })}
           </p>
           
-          <button onClick={() => alert("Produto adicionado ao carrinho! (Funcionalidade futura)")}>
+          <button onClick={() => adicionarAoCarrinho(id)}>
             Adicionar ao Carrinho
           </button>
         </div>

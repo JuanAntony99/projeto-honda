@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const express = require('express');
 const cors = require('cors');
 const db = require('./db');
@@ -8,6 +10,64 @@ app.use(cors());
 
 app.use(express.json());
 
+
+const SECRET = "segredo";
+
+app.post("/login", async (req, res) => {
+  let conn;
+
+  try {
+    const { email, password } = req.body;
+
+    conn = await db.getConnection();
+
+    const rows = await conn.query(
+      "SELECT * FROM usuarios WHERE email = ?",
+      [email]
+    );
+
+    const user = rows[0];
+
+    if (!user) {
+      return res.status(401).json({
+        error: "Email ou senha inválidos",
+      });
+    }
+
+    const passwordMatch = await bcrypt.compare(
+      password,
+      user.senha
+    );
+
+    if (!passwordMatch) {
+      return res.status(401).json({
+        error: "Email ou senha inválidos",
+      });
+    }
+
+    const token = jwt.sign(
+      { id: user.id },
+      SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.json({
+      token,
+      user: {
+        id: user.id,
+        nome: user.nome,
+        email: user.email,
+      },
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  } finally {
+    if (conn) conn.release();
+  }
+});
 
 // LISTAR 
 app.get('/produtos', async (req, res) => {
@@ -38,6 +98,32 @@ app.get('/produtos', async (req, res) => {
 
 });
 
+app.get('/carrinho/:id', async (req, res) => {
+    let conn;
+    try {
+        const { id } = req.params; 
+        conn = await db.getConnection();
+
+        const resultado = await conn.query(
+            'SELECT p.id, p.nome, p.preco, p.imagem FROM produtos AS p INNER JOIN carrinho AS c ON c.id_produto = p.id WHERE c.id_usuario = ?', 
+            [id]
+        );
+
+        if (resultado.length === 0) {
+            return res.status(404).json({ mensagem: "Carrinho Vazio" });
+        }
+
+        res.json(resultado);
+
+    } catch (err) {
+        res.status(500).json({ erro: err.message });
+    } finally {
+        if (conn) conn.release();
+    }
+});
+
+
+
 
 app.get('/produtos/:id', async (req, res) => {
     let conn;
@@ -67,42 +153,64 @@ app.get('/produtos/:id', async (req, res) => {
 });
 
 // INSERIR
-app.post('/usuarios', async (req, res) => {
+app.post("/usuarios", async (req, res) => {
+  let conn;
 
-    let conn;
+  try {
+    const { nome, telefone, cpf, email, senha } = req.body;
 
-    try {
+    conn = await db.getConnection();
 
-        const { nome,telefone,cpf,email,senha } = req.body;
+    const senhaHash = await bcrypt.hash(senha, 10);
 
-        const nomeStr = nome;
-        const telefoneStr = telefone;
-        const cpfStr = cpf;
-        const emailStr = email;
-        const senhaStr = senha;
+    await conn.query(
+      "INSERT INTO usuarios (nome, telefone, cpf, email, senha) VALUES (?, ?, ?, ?, ?)",
+      [nome, telefone, cpf, email, senhaHash]
+    );
 
-        conn = await db.getConnection();
+    res.json({
+      mensagem: "Usuário cadastrado com sucesso",
+    });
 
-            await conn.query(
-            'INSERT INTO USUARIOS(nome,telefone,cpf,email,senha) VALUES(?,?,?,?,?)',
-            [nomeStr, telefoneStr, cpfStr, emailStr, senhaStr]
-            );
+  } catch (err) {
+    console.error(err);
 
-        res.json({
-            mensagem: 'Usuario cadastrado'
-        });
+    res.status(500).json({
+      erro: err.message,
+    });
 
-    } catch (err) {
-        // OUTROS ERROS
-        res.status(500).json({
-            erro: err.message
-        });
-    } finally {
+  } finally {
+    if (conn) conn.release();
+  }
+});
 
-        if (conn) conn.release();
+app.post("/carrinho", async (req, res) => {
+  let conn;
 
-    }
+  try {
+    const { id_usuario, id_produto, qtde } = req.body;
 
+    conn = await db.getConnection();
+
+    await conn.query(
+      "INSERT INTO carrinho (id_usuario, id_produto, qtde) VALUES (?, ?, ?)",
+      [id_usuario, id_produto, qtde]
+    );
+
+    res.json({
+      mensagem: "Produto Adicionado com sucesso",
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({
+      erro: err.message,
+    });
+
+  } finally {
+    if (conn) conn.release();
+  }
 });
 
 

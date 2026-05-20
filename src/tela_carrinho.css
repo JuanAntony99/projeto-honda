@@ -5,17 +5,25 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  background-color: #111;
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
+body {
+  background-color: #111;
+  overflow-x: hidden; /* evita scroll horizontal */
+}
+
+/* CONTAINER */
 .container-prod{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
+/* NAVBAR */
 .navbar-prod {
   background-color: #111;
   color: white;
@@ -24,7 +32,7 @@ body {
   justify-content: space-between;
   align-items: center;
 
-  padding: 20px 40px;
+  padding: 10px 40px;
 
   border-bottom: 2px solid #cc0000;
   padding-bottom: 10px;
@@ -32,13 +40,14 @@ body {
 
 .logo-prod {
   display: flex;
-  height: 10vh;
+  height: 4vh;
 }
 
 .navbar-prod h1 {
   color: #cc0000;
 }
 
+/* USER */
 .user-prod {
   display: flex;
   gap: 20px;
@@ -57,6 +66,7 @@ body {
   color: #cc0000;
 }
 
+/* BANNER */
 .banner-prod {
   background-color: #cc0000;
   color: white;
@@ -72,111 +82,90 @@ body {
 }
 
 .produtos-prod {
-  display: list-item;
-  justify-content: center;
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 12px;
 
   padding: 40px;
 
-  flex-wrap: wrap;
-
-
-  max-height: 80vh; /* Ajuste para não ocupar a tela toda */
+  max-height: 80vh;
   overflow-y: auto;
-  direction: ltr;    /* Move a barra para a esquerda */
-  padding-left: 20px; /* Dá espaço para a barra não tocar no card */
+  overflow-x: hidden;
+
+  width: 100%;
 }
 
 .card-prod {
   background-color: white;
 
-  width: 90vh;
+  width: min(900px, 95%);
+  max-width: 100%;
+
   height: 6vh;
 
   border-radius: 16px;
 
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 12px;
 
   box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-
-  transition: 0.3s;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 10px;
-  margin-bottom: 10px;
 
   transition: .2s ease;
 }
 
+.card-prod:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
+  background-color: #f8f8f8;
+}
 
+/* IMAGEM */
+.card-prod img {
+  width: 8vh;
+  height: 5vh;
+
+  object-fit: contain;
+
+  background-color: #f5f5f5;
+  border-radius: 0.5vh;
+
+  flex-shrink: 0;
+}
+
+/* TEXTO */
+.card-prod h3 {
+  flex: 1;
+  min-width: 0;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  color: #111;
+  padding: 0 10px;
+}
+
+/* PREÇO */
+.card-prod p {
+  white-space: nowrap;
+  padding: 0 15px;
+  color: #111;
+}
+
+/* SELECT */
 .card-prod.selected {
   border: 2px solid red;
   box-shadow: 0 0 12px rgba(255,0,0,.25);
   background-color: rgb(204, 204, 204);
 }
 
-.card-prod:hover {
-  transform: scale(1.01);
-  cursor: pointer;
-  background-color: #f8f8f8;
-  border-color: #cc0000;
-  transform: translateY(-2px);
-  transition: all 0.2s ease-in-out;
-}
-
-.card-prod img {
-  width: 8vh; 
-  height: 5vh; 
-
-  object-fit: contain; 
-
-  display: block;
-
-  margin-right: 1.5vh; 
-  
-  background-color: #f5f5f5;
-  border-radius: 0.5vh;
-}
-
-.card-prod h3 {
-  text-align: left;
-  width: 60vh;
-
-  color: #111;
-}
-
-.card-prod p {
-  padding: 0 15px;
-  color: #111;
-}
-
-.card-prod button {
-  margin: 15px;
-
-  width: calc(100% - 30px);
-
-  padding: 12px;
-
-  border: none;
-
-  background-color: #cc0000;
-
-  color: white;
-
-  border-radius: 5px;
-
-  cursor: pointer;
-
-  transition: 0.3s;
-}
-
-.card-prod button:hover {
-  background-color: #990000;
-}
-
+/* CHECKBOX */
 .check-prod {
   display: flex;
   align-items: center;
@@ -212,48 +201,44 @@ body {
   left: 2px;
 }
 
+/* FOOTER */
 .rodape-pag-prod {
   padding: 0 40px;
-  justify-content:space-between;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
   background-color: #cc0000;
   height: 70px;
   color: white;
 
-  text-align: center;
   margin-top: auto;
-
 }
 
 .rodape-pag-prod h3{
   font-size: 1.4rem;
   font-weight: bold;
 
-  text-align: left;
-  width: 140vh;
-
   color: white;
-
-  font-weight: bold;
 }
 
 .rodape-pag-prod button {
   box-shadow: 0 2px 8px rgba(0,0,0,.25);
-  border-radius: 12px;
-  font-weight: 600;
+
   background-color: #f3f3f3;
+
   width: 30vh;
   height: 50px;
-  border-radius: 10px;
-  padding: 10px 16px;
+
   border: none;
-  
+  border-radius: 10px;
+
   color: #111;
-  font-weight: bold;
   font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
 }
 
 .image-prod {

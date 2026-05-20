@@ -9,14 +9,47 @@ function App() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  function login_adm() {
+  async function login_adm(e) {
+    e.preventDefault();
 
-    if (email === "admin@honda.com" && senha === "admin123") {
-      navigate("/adminpage");
-    } else {
-      alert("Email ou senha inválidos");
+    try {
+      const response = await fetch(
+        "http://localhost:3000/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password: senha,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem(
+          "token",
+          data.token
+        );
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify(data.user)
+        );
+
+        alert("Login realizado");
+
+        console.log(data.user.id);
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {
+      console.log(error);
     }
-
   }
 
   return (
