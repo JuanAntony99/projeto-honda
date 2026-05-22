@@ -20,25 +20,6 @@ DROP DATABASE IF EXISTS `loja`;
 CREATE DATABASE IF NOT EXISTS `loja` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `loja`;
 
--- Copiando estrutura para tabela loja.carrinho
-DROP TABLE IF EXISTS `carrinho`;
-CREATE TABLE IF NOT EXISTS `carrinho` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_usuario` int NOT NULL,
-  `id_produto` int NOT NULL,
-  `qtde` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK__usuarios` (`id_usuario`),
-  KEY `FK__produtos` (`id_produto`),
-  CONSTRAINT `FK__produtos` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`),
-  CONSTRAINT `FK__usuarios` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela loja.carrinho: ~0 rows (aproximadamente)
-DELETE FROM `carrinho`;
-INSERT INTO `carrinho` (`id`, `id_usuario`, `id_produto`, `qtde`) VALUES
-	(1, 37, 1, 1);
-
 -- Copiando estrutura para tabela loja.produtos
 DROP TABLE IF EXISTS `produtos`;
 CREATE TABLE IF NOT EXISTS `produtos` (
@@ -49,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela loja.produtos: ~16 rows (aproximadamente)
+-- Copiando dados para a tabela loja.produtos: ~17 rows (aproximadamente)
 DELETE FROM `produtos`;
 INSERT INTO `produtos` (`id`, `nome`, `preco`, `imagem`) VALUES
 	(1, 'Civic Type R', 430500, 'Civic Type R.png'),
@@ -69,34 +50,6 @@ INSERT INTO `produtos` (`id`, `nome`, `preco`, `imagem`) VALUES
 	(15, 'Honda GL 1800 Gold Wing', 304450, 'Gold Wing.png'),
 	(16, 'Honda ADV 150', 23060, 'ADV 150.png'),
 	(17, 'Honda NC 750X DCT', 58346, 'NC 750X.png');
-
--- Copiando estrutura para tabela loja.usuarios
-DROP TABLE IF EXISTS `usuarios`;
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `telefone` varchar(50) NOT NULL DEFAULT '',
-  `cpf` varchar(50) NOT NULL DEFAULT '',
-  `email` varchar(50) NOT NULL DEFAULT '',
-  `senha` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nome_usuario` (`nome`) USING BTREE,
-  UNIQUE KEY `cpf` (`cpf`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Copiando dados para a tabela loja.usuarios: ~5 rows (aproximadamente)
-DELETE FROM `usuarios`;
-INSERT INTO `usuarios` (`id`, `nome`, `telefone`, `cpf`, `email`, `senha`) VALUES
-	(29, '', '', '', '', '1'),
-	(31, 'i', '1', '1', '1', '1'),
-	(34, 'i546', '156', '165', '1@16', '1'),
-	(35, 'ismael', '12121', '212121', 'isamel@122', '12345'),
-	(36, 'ismael 12', '35432425', '25443543', 'q@1', '123'),
-	(37, 'Juan Antony', '83 12112314', '234190825', 'juan@gmail.com', '$2b$10$v7.O1velgmCsHems/YqDgOaMxoK8g3dEUgOgvr.8op9xw6rrtqPAW'),
-	(39, 'Ismael F.', '43234234', '3423423', 'Ismael@honda.com', '$2b$10$eOm/cpWDoMIfV3/DfXFaBuK6gN4yLdy9Qk8qPE8CAOrX.htf/8Qpq'),
-	(40, 'ruan', '89271907', '78970987', 'ruan@gmail.com', '$2b$10$Y/o14oJG0/VPvZLLyxcmsemlvkcOOoEIeas/VvPgkZWTBBSnxsAYW'),
-	(41, 'Ismael F. G.', '46535635', '3535436', 'ismael1@gmail.com', '$2b$10$eiYXmU4GcrUig3E/h4uMpOxIboLJfFHvgSRbeHjE6rxFHrd.2BvIS');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -16,7 +16,6 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-
 }
 
 .cadastro-card {
@@ -25,7 +24,7 @@ body {
   background: #fff;
   padding: 40px;
   border-radius: 16px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
 }
 
 .logo-area {

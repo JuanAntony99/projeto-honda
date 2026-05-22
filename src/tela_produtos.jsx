@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./tela_produtos.css";
 
 function TELAPRODUTOS() {
   const user = JSON.parse(localStorage.getItem("user"));
-  
+
   let id_cliente = 0;
 
   if (!user || Object.keys(user).length === 0) {
@@ -34,8 +34,8 @@ function TELAPRODUTOS() {
         // CORREÇÃO 2: Enviando todos os dados que o seu back-end (req.body) espera receber
         body: JSON.stringify({
           id_usuario: id_cliente, // Seu back espera 'id_usuario'
-          id_produto: idProduto,  // ID do produto que foi passado por parâmetro
-          qtde: 1                 // Quantidade padrão inicial
+          id_produto: idProduto, // ID do produto que foi passado por parâmetro
+          qtde: 1, // Quantidade padrão inicial
         }),
       });
 
@@ -82,24 +82,34 @@ function TELAPRODUTOS() {
   }
 
   return (
-      <div className="pagina-detalhe" style={{ padding: "20px", textAlign: "center" }}>
-
+    <div
+      className="pagina-detalhe"
+      style={{ padding: "20px", textAlign: "center" }}
+    >
       <section className="produtos_prod">
         <div className="card-produtos">
-        <button id='back' onClick={() => navigate("/")} style={{ marginBottom: "20px" }}>
-          ←
-        </button>
-          <img src={`/${produto.imagem}`} alt={produto.nome} style={{ maxWidth: "300px" }} />
-          
+          <button
+            id="back"
+            onClick={() => navigate("/")}
+            style={{ marginBottom: "20px" }}
+          >
+            ←
+          </button>
+          <img
+            src={`/${produto.imagem}`}
+            alt={produto.nome}
+            style={{ maxWidth: "300px" }}
+          />
+
           <h3>{produto.nome}</h3>
-          
+
           <p>
             {produto.preco?.toLocaleString("pt-BR", {
               style: "currency",
               currency: "BRL",
             })}
           </p>
-          
+
           <button onClick={() => adicionarAoCarrinho(id)}>
             Adicionar ao Carrinho
           </button>

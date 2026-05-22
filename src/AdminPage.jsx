@@ -39,10 +39,8 @@ export default function AdminPage() {
           </div>
         </div>
       </div>
-      
-      <footer className="rodape-pag-principal">
-        © 2026 - Site Honda
-      </footer>
+
+      <footer className="rodape-pag-principal">© 2026 - Site Honda</footer>
     </div>
   );
 }

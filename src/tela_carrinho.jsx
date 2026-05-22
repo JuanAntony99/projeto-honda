@@ -1,56 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "./assets/vite.svg";
+import heroImg from "./assets/hero.png";
 import "./tela_carrinho.css";
-import { useMemo } from 'react';
+import { useMemo } from "react";
 import { useEffect } from "react";
 
 function tela_principal() {
   const [selected, setSelected] = useState({});
   const user = JSON.parse(localStorage.getItem("user"));
 
+  let id = 0;
+  let nome = "";
 
-    let id = 0;
-    let nome = "";
+  if (!user || Object.keys(user).length === 0) {
+    id = 0;
+    nome = "";
+  } else {
+    id = user.id;
+    nome = user.nome;
+  }
 
-    if (!user || Object.keys(user).length === 0) {
-      id = 0;
-      nome = "";
-    } else {
-      id = user.id;
-      nome = user.nome;
-    }
-
-
-  
   const [produtos, setDados] = useState([]);
 
-    useEffect(() => {
-    if (id != 0){
+  useEffect(() => {
+    if (id != 0) {
       buscarProdutos();
     }
-  }, []); 
-  
-    async function buscarProdutos() {
-  try {
-    const resposta = await fetch(`http://localhost:3000/carrinho/${id}`);
+  }, []);
 
-    if (!resposta.ok) {
+  async function buscarProdutos() {
+    try {
+      const resposta = await fetch(`http://localhost:3000/carrinho/${id}`);
+
+      if (!resposta.ok) {
+        setDados([]);
+        return;
+      }
+
+      const dadosDados = await resposta.json();
+      setDados(dadosDados);
+    } catch (error) {
+      console.error("Erro ao buscar os produtos:", error);
       setDados([]);
-      return;
     }
-
-    const dadosDados = await resposta.json();
-    setDados(dadosDados);
-    
-  } catch (error) {
-    console.error("Erro ao buscar os produtos:", error);
-    setDados([]);
   }
-}
 
- 
   const total = useMemo(() => {
     return produtos.reduce((acc, produto) => {
       if (selected[produto.id]) {
@@ -64,15 +59,17 @@ function tela_principal() {
 
   return (
     <div className="container-prod">
-
       <nav className="navbar-prod">
-        
-        <div className='logo-prod'>
-          <img src='Honda_logo.png'></img>
-        </div>
+        <a className="logo-prod" href="/">
+          <img src="Honda_logo.png"></img>
+        </a>
 
         <div className="user-prod">
-          <img className='image-prod' src="https://randomuser.me/api/portraits/men/1.jpg" alt="" />
+          <img
+            className="image-prod"
+            src="https://randomuser.me/api/portraits/men/1.jpg"
+            alt=""
+          />
           <h2>{nome}</h2>
         </div>
       </nav>
@@ -84,16 +81,29 @@ function tela_principal() {
           </div>
         ) : (
           produtos.map((produto) => (
-            <div 
-              key={produto.id} 
-              className={`card-prod ${selected[produto.id] ? "selected" : ""}`} 
-              onClick={() => setSelected({...selected, [produto.id]: !selected[produto.id]})}
+            <div
+              key={produto.id}
+              className={`card-prod ${selected[produto.id] ? "selected" : ""}`}
+              onClick={() =>
+                setSelected({
+                  ...selected,
+                  [produto.id]: !selected[produto.id],
+                })
+              }
             >
-              <label className="check-prod" onClick={(e) => e.stopPropagation()}>
-                <input 
-                  type="checkbox" 
-                  checked={selected[produto.id] || false} 
-                  onChange={() => setSelected({...selected, [produto.id]: !selected[produto.id]})}
+              <label
+                className="check-prod"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <input
+                  type="checkbox"
+                  checked={selected[produto.id] || false}
+                  onChange={() =>
+                    setSelected({
+                      ...selected,
+                      [produto.id]: !selected[produto.id],
+                    })
+                  }
                 />
                 <span></span>
               </label>
@@ -102,17 +112,37 @@ function tela_principal() {
 
               <h3>{produto.nome}</h3>
 
-              <p>{produto.preco.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</p>
+              <p>
+                {produto.preco.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
             </div>
           ))
         )}
       </section>
 
-        <footer className='rodape-pag-prod'>
-          <h3>Total: <strong>{total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong></h3>
+      <footer className="rodape-pag-prod">
+        <h3>
+          Total:{" "}
+          <strong>
+            {total.toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          </strong>
+        </h3>
 
-          <button className="btn-continuar-prod" disabled={total === 0} onClick={() => alert("Compra finalizada")}> Continuar </button>
-        </footer>
+        <button
+          className="btn-continuar-prod"
+          disabled={total === 0}
+          onClick={() => alert("Compra finalizada")}
+        >
+          {" "}
+          Continuar{" "}
+        </button>
+      </footer>
     </div>
   );
 }

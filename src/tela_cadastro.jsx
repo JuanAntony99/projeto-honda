@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "./tela_cadastro.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function tela_cadastro() {
-
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
-  
+
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -17,21 +16,21 @@ function tela_cadastro() {
   });
 
   async function salvarUsuario() {
-  try {
-    const resposta = await fetch('http://localhost:3000/usuarios', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const resposta = await fetch("http://localhost:3000/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-  const dados = await resposta.json();
-      if(dados.erro!=undefined){
-          alert('Já existe um usuario com esse nome')
-        }
+      const dados = await resposta.json();
+      if (dados.erro != undefined) {
+        alert("Já existe um usuario com esse nome");
+      }
     } catch (erro) {
-        console.error(erro)
+      console.error(erro);
     }
   }
 
@@ -52,6 +51,7 @@ function tela_cadastro() {
 
     salvarUsuario();
     alert("Cadastro realizado com sucesso!");
+    navigate("/login");
 
     setFormData({
       nome: "",

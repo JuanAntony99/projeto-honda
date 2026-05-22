@@ -64,7 +64,7 @@
   background-color: #990000;
 }
 
-#back{
+#back {
   width: 40px;
   height: 40px;
   margin: 20px 20px 20px 20px;
@@ -97,7 +97,7 @@
   min-height: 60vh; /* Ocupa boa parte da tela verticalmente */
   padding: 20px;
   text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
   border-radius: 8px;
   max-width: 500px;
@@ -121,7 +121,9 @@
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px; /* Espaço entre a seta e o texto */
@@ -129,7 +131,7 @@
 
 /* Efeito ao passar o mouse */
 .pagina-error button:hover {
-  background-color: #cc0000; 
+  background-color: #cc0000;
 }
 
 /* Efeito ao clicar */
