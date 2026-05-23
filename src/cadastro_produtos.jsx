@@ -4,13 +4,17 @@ import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./cadastro_produtos.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useMemo } from "react";
 
 function adm_produtos() {
   const navigate = useNavigate();
+  
   const [nome, setNome] = useState("");
   const [preco, setPreco] = useState("");
   const [link, setLink] = useState("");
   const [produtos, setProdutos] = useState([]);
+
   function cadastrarProduto() {
     if (nome === "" || preco === "" || link === "") {
       alert("Preencha todos os campos");
@@ -20,19 +24,73 @@ function adm_produtos() {
       id: Date.now(),
       nome,
       preco,
-      link,
+      imagem: link,
     };
     setProdutos([...produtos, novoProduto]);
 
     setNome("");
     setPreco("");
     setLink("");
-  }
-  function excluirProduto(id) {
-    const novaLista = produtos.filter((produto) => produto.id !== id);
 
-    setProdutos(novaLista);
+    salvarProduto(novoProduto);
   }
+   async function excluirProduto(id) {
+    try {
+        const resposta = await fetch(
+          `http://localhost:3000/produtos/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+          throw new Error(dados.erro || dados.mensagem);
+        }
+
+        alert("Produto deletado com sucesso!");
+        buscarProdutos();
+
+      } catch (erro) {
+        console.error("Erro:", erro.message);
+      }
+  }
+
+  useEffect(() => {
+      buscarProdutos();
+    }, []);
+
+  async function buscarProdutos() {
+    try {
+      const resposta = await fetch("http://localhost:3000/produtos");
+      const produtos = await resposta.json();
+      setProdutos([]);
+      setProdutos(produtos);
+    } catch (error) {
+      console.error("Erro ao buscar os produtos:", error);
+    }
+  }
+  async function salvarProduto(produto) {
+    try {
+      const resposta = await fetch("http://localhost:3000/produtos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(produto),
+      });
+
+      const dados = await resposta.json();
+      buscarProdutos();
+      if (dados.erro != undefined) {
+        alert("Já existe um usuario com esse nome");
+      }
+    } catch (erro) {
+      console.error(erro);
+    }
+  }
+
   return (
     <>
       <a className="header" href="/">

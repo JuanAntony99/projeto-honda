@@ -28,8 +28,6 @@ function tela_principal() {
   }
   const dominio = email.split("@")[1];
 
-  console.log(dominio);
-
   async function buscarProdutos() {
     try {
       const resposta = await fetch("http://localhost:3000/produtos");

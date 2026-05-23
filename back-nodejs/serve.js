@@ -184,6 +184,66 @@ app.post("/usuarios", async (req, res) => {
   }
 });
 
+app.post("/produtos", async (req, res) => {
+  let conn;
+
+  try {
+    const { nome, preco, imagem } = req.body;
+
+    conn = await db.getConnection();
+
+    await conn.query(
+      "INSERT INTO produtos (nome, preco, imagem) VALUES (?, ?, ?)",
+      [nome, preco, imagem]
+    );
+
+    res.json({
+      mensagem: "Produto cadastrado com sucesso",
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({
+      erro: err.message,
+    });
+
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
+app.delete("/produtos/:id", async (req, res) => {
+  let conn;
+
+  try {
+    const { id } = req.params;
+
+    conn = await db.getConnection();
+
+    const resultado = await conn.query(
+      "DELETE FROM produtos WHERE id = ?",
+      [id]
+    );
+
+    console.log(resultado);
+
+    res.status(200).json({
+      mensagem: "Produto deletado com sucesso!"
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({
+      erro: err.message
+    });
+
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
 app.post("/carrinho", async (req, res) => {
   let conn;
 
