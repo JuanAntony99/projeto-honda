@@ -96,15 +96,10 @@ function App() {
               onChange={(e) => setSenha(e.target.value)}
             />
           </div>
-
-          <div className="options">
-            <div className="remember">
-              <input type="checkbox" />
-              <span>Lembrar senha</span>
+            <div className="options">
+              <a href="#">Esqueci minha senha</a>
             </div>
-
-            <a href="#">Esqueci minha senha</a>
-          </div>
+     
 
           <button className="btn-login" onClick={login_adm}>
             Entrar

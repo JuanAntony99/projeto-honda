@@ -42,33 +42,35 @@ function tela_principal() {
 
   return (
     <div className="container-principal">
-      <nav className="navbar">
-        <div className="logo">
-          <img src="Honda_logo.png"></img>
-        </div>
+     <nav className="navbar">
+  <div className="logo">
+    <img src="Honda_logo.png"></img>
+  </div>
 
-        <div className="links">
-          {email.split("@")[1] === "honda.com" ? (
-            <div className="links">
-              <a onClick={() => navigate("/cadastro_produtos")}>Produtos</a>
-              <a onClick={() => navigate("/carrinho")}>Carrinho</a>
-              <a onClick={() => navigate("/login")}>Login</a>
-              <a onClick={() => navigate("/cadastro")}>Cadastro</a>
-            </div>
-          ) : (
-            <div className="links">
-              <a onClick={() => navigate("/carrinho")}>Carrinho</a>
-              <a onClick={() => navigate("/login")}>Login</a>
-              <a onClick={() => navigate("/cadastro")}>Cadastro</a>
-            </div>
-          )}
-        </div>
-      </nav>
-
+  <div className="links">
+    {email.split("@")[1] === "honda.com" ? (
+      <div className="links">
+        <a onClick={() => navigate("/cadastro_produtos")}>🛠️ Produtos</a>
+        <a onClick={() => navigate("/carrinho")}>🛒 Carrinho</a>
+        <a onClick={() => navigate("/login")}>👤 Login</a>
+        <a onClick={() => navigate("/cadastro")}>📝 Cadastro</a>
+      </div>
+    ) : (
+      <div className="links">
+        <a onClick={() => navigate("/carrinho")}>🛒 Carrinho</a>
+        <a onClick={() => navigate("/login")}>👤 Login</a>
+        <a onClick={() => navigate("/cadastro")}>📝 Cadastro</a>
+      </div>
+    )}
+  </div>
+</nav>
       <header className="banner">
-        <h2>Potência e inovação sobre rodas</h2>
-        <p>Conheça os principais modelos Honda</p>
-      </header>
+  <h2>Potência e inovação sobre rodas</h2>
+  <p>Conheça os principais modelos Honda</p>
+  <button onClick={() => window.scrollTo({ top: 500, behavior: 'smooth' })}>
+    Ver todos os modelos 
+  </button>
+</header>
 
       <section className="produtos_principal">
         {produtos.map((produto) => (

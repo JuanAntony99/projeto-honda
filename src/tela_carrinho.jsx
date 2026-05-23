@@ -1,7 +1,4 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
 import "./tela_carrinho.css";
 import { useMemo } from "react";
 import { useEffect } from "react";
@@ -43,6 +40,17 @@ function tela_principal() {
     } catch (error) {
       console.error("Erro ao buscar os produtos:", error);
       setDados([]);
+    }
+  }
+
+  async function removerProduto(idProduto) {
+    try {
+      await fetch(`http://localhost:3000/carrinho/${idProduto}`, {
+        method: "DELETE",
+      });
+      setDados(produtos.filter((p) => p.id !== idProduto));
+    } catch (error) {
+      console.error("Erro ao remover produto:", error);
     }
   }
 
@@ -118,6 +126,16 @@ function tela_principal() {
                   currency: "BRL",
                 })}
               </p>
+
+              <button
+                className="btn-remover-prod"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removerProduto(produto.id);
+                }}
+              >
+                ✕
+              </button>
             </div>
           ))
         )}
@@ -139,8 +157,7 @@ function tela_principal() {
           disabled={total === 0}
           onClick={() => alert("Compra finalizada")}
         >
-          {" "}
-          Continuar{" "}
+          Continuar
         </button>
       </footer>
     </div>

@@ -273,6 +273,20 @@ app.post("/carrinho", async (req, res) => {
   }
 });
 
+app.delete("/carrinho/:id", async (req, res) => {
+  let conn;
+  try {
+    const { id } = req.params;
+    conn = await db.getConnection();
+    await conn.query("DELETE FROM carrinho WHERE id_produto = ?", [id]);
+    res.json({ mensagem: "Produto removido do carrinho" });
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
 
 
 
