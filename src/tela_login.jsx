@@ -49,7 +49,9 @@ function App() {
         <div className="overlay"></div>
 
         <div className="content-left">
-          <h1>HONDA</h1>
+          <a className="logo-honda" href="/">
+        <h1>HONDA</h1>
+         </a>
 
           <p>Faça seu login e visite nossa loja.</p>
 

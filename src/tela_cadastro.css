@@ -34,11 +34,10 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
 .logo {
-  width: 20vh;
+  width: 40vh;
   margin-bottom: 25px;
-}
+} 
 
 .logo-area h1 {
   color: #cc0000;

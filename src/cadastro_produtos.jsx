@@ -33,6 +33,7 @@ function adm_produtos() {
     setLink("");
 
     salvarProduto(novoProduto);
+    alert("Cadastro realizado com sucesso!");
   }
    async function excluirProduto(id) {
     try {
@@ -81,14 +82,14 @@ function adm_produtos() {
         body: JSON.stringify(produto),
       });
 
-      const dados = await resposta.json();
-      buscarProdutos();
-      if (dados.erro != undefined) {
-        alert("Já existe um usuario com esse nome");
+    //   const dados = await resposta.json();
+    //   buscarProdutos();
+    //    if (dados.erro != undefined) {
+    //      alert("Já existe um produto com esse nome");
+    //    }
+      } catch (erro) {
+        console.error(erro);
       }
-    } catch (erro) {
-      console.error(erro);
-    }
   }
 
   return (

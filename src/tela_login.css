@@ -35,6 +35,9 @@ body {
   padding: 70px;
 }
 
+a {
+    text-decoration:none;
+}
 .overlay {
   position: absolute;
   inset: 0;
